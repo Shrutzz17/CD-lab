@@ -1,0 +1,100 @@
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;ctype.h&gt;
+#include&lt;fstream&gt;
+using namespace std;
+
+string arr[] = { &quot;void&quot;, &quot;using&quot;, &quot;namespace&quot;, &quot;int&quot;, &quot;include&quot;, &quot;iostream&quot;, &quot;std&quot;, &quot;main&quot;,
+&quot;cin&quot;, &quot;cout&quot;, &quot;return&quot;, &quot;float&quot;, &quot;double&quot;, &quot;string&quot; };
+
+bool
+isKeyword (string a)
+
+{
+for (int i = 0; i &lt; 14; i++)
+{
+if (arr[i] == a)
+{
+return true;
+}
+}
+return false;
+}
+
+int main()
+{
+
+fstream file;
+string s, filename;
+
+filename = &quot;./add.c&quot;;
+
+file.open(filename.c_str());
+
+while (file &gt;&gt; s)
+{
+if (s == &quot;+&quot; || s == &quot;-&quot; || s == &quot;&quot; || s == &quot;/&quot; || s == &quot;^&quot; || s == &quot;&amp;&amp;&quot; || s == &quot;||&quot; || s == &quot;=&quot; || s == &quot;==&quot; ||
+s == &quot;&amp;&quot; || s == &quot;|&quot; || s == &quot;%&quot; || s == &quot;++&quot; || s == &quot;--&quot; || s == &quot;+=&quot; || s == &quot;-=&quot; || s == &quot;/=&quot; || s == &quot;=&quot; || s
+== &quot;%=&quot;)
+{
+cout &lt;&lt; s &lt;&lt; &quot; is an operator\n&quot;;
+s = &quot;&quot;;
+}
+else if (isKeyword (s))
+{
+cout &lt;&lt; s &lt;&lt; &quot; is a keyword\n&quot;;
+s = &quot;&quot;;
+}
+
+else if (s == &quot;(&quot; || s == &quot;{&quot; || s == &quot;[&quot; || s == &quot;)&quot; || s == &quot;}&quot; || s == &quot;]&quot; || s == &quot;&lt;&quot; || s == &quot;&gt;&quot; || s ==
+&quot;()&quot; || s == &quot;;&quot; || s == &quot;&lt;&lt;&quot; || s == &quot;&gt;&gt;&quot; || s == &quot;,&quot; || s == &quot;#&quot;)
+{
+cout &lt;&lt; s &lt;&lt; &quot; is a symbol\n&quot;;
+s = &quot;&quot;;
+
+}
+else if (s == &quot;\n&quot; || s == &quot; &quot; || s == &quot;&quot;)
+{
+s = &quot;&quot;;
+
+}
+else if (isdigit (s[0]))
+{
+int x = 0;
+if (!isdigit (s[x++]))
+{
+continue;
+}
+else
+{
+cout &lt;&lt; s &lt;&lt; &quot; is a constant\n&quot;;
+s = &quot;&quot;;
+}
+}
+else
+{
+cout &lt;&lt; s &lt;&lt; &quot; is an identifier\n&quot;;
+s = &quot;&quot;;
+}
+}
+
+return 0;
+}
+
+
+
+
+
+
+INUPUT-
+#include &lt;stdio.h&gt;
+
+void main ( )
+
+{
+int x = 6 ;
+int y = 4 ;
+x = x + y ;
+printf(&quot;%d&quot;, x);
+}
